@@ -10,7 +10,13 @@ export class MailTrapMailProvider implements IMailProvider {
   private transporter: Mail
 
   constructor() {
-    this.transporter = nodemailer.createTransport(process.env.BYPASS)
+    this.transporter = nodemailer.createTransport({
+      service: 'Hotmail',
+      auth: {
+        user: process.env.EMAIL,
+        pass: process.env.PASSWORD
+      }
+    })
   }
 
   async sendMail(message: IMessage): Promise<void> {
